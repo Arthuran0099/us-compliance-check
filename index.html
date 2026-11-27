@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>US Multi-State Compliance Determination | Sales Tax Nexus &amp; Packaging EPR</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --ink: #0f172a;
+      --muted: #475569;
+      --border: #cbd5e1;
+      --accent: #0f2942;
+      --accent-soft: #e0f2fe;
+      --red-bg: #fee2e2;
+      --red-fg: #991b1b;
+      --yellow-bg: #fef3c7;
+      --yellow-fg: #92400e;
+      --green-bg: #dcfce7;
+      --green-fg: #166534;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrap {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 48px 20px 64px;
+    }
+    section {
+      margin-bottom: 48px;
+    }
+    h1 {
+      font-size: 2.1rem;
+      line-height: 1.2;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+    h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--border);
+    }
+    p.lead {
+      font-size: 1.08rem;
+      color: var(--muted);
+      max-width: 720px;
+    }
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+    .tag {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background: var(--accent-soft);
+      color: var(--accent);
+      padding: 4px 10px;
+      border-radius: 4px;
+    }
+    .sample-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+      overflow-x: auto;
+    }
+    .sample-meta {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+    th, td {
+      text-align: left;
+      padding: 10px 12px;
+      border-bottom: 1px solid #e2e8f0;
+      vertical-align: top;
+    }
+    th {
+      background: #f1f5f9;
+      font-weight: 700;
+      color: var(--accent);
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    .pill {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+    .pill-red { background: var(--red-bg); color: var(--red-fg); }
+    .pill-yellow { background: var(--yellow-bg); color: var(--yellow-fg); }
+    .pill-green { background: var(--green-bg); color: var(--green-fg); }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 760px) {
+      .grid-3 { grid-template-columns: 1fr; }
+      h1 { font-size: 1.7rem; }
+    }
+    .tier {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 22px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .tier.featured {
+      border-color: var(--accent);
+      border-width: 2px;
+    }
+    .tier-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .tier h3 {
+      font-size: 1.1rem;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .price {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--ink);
+      margin-bottom: 12px;
+    }
+    .price span {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--muted);
+    }
+    .tier ul {
+      list-style: none;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    .tier ul li {
+      padding-left: 16px;
+      position: relative;
+      margin-bottom: 8px;
+    }
+    .tier ul li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+    @media (max-width: 760px) {
+      .steps { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      .steps { grid-template-columns: 1fr; }
+    }
+    .step {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .step-num {
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+    .step strong {
+      display: block;
+      font-size: 0.95rem;
+      margin-bottom: 4px;
+    }
+    .step p {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    footer.contact-box {
+      background: var(--accent);
+      color: #f8fafc;
+      border-radius: 8px;
+      padding: 28px 24px;
+    }
+    footer.contact-box h2 {
+      color: #ffffff;
+      border-bottom-color: rgba(255, 255, 255, 0.2);
+    }
+    .contact-email {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #bae6fd;
+      text-decoration: underline;
+      display: inline-block;
+      margin: 6px 0 10px;
+    }
+    .rule-note {
+      font-size: 0.95rem;
+      color: #e2e8f0;
+      margin-bottom: 16px;
+    }
+    .disclaimer {
+      font-size: 0.82rem;
+      color: #cbd5e1;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      padding-top: 12px;
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <!-- 1. Positioning -->
+    <section>
+      <div class="tag-row">
+        <span class="tag">US Sales Tax Nexus</span>
+        <span class="tag">7-State Packaging EPR</span>
+        <span class="tag">1099-K Reconciliation</span>
+      </div>
+      <h1>Clear US Multi-State Compliance Determinations for Cross-Border Sellers</h1>
+      <p class="lead">
+        Fixed-fee threshold determinations, small-producer exemption checks, and practical 30-day roadmaps for Amazon FBA, Shopify DTC, and US B2B consumer brands. Administrative clarity without annual software lock-in.
+      </p>
+    </section>
+
+    <!-- 2. Sample Preview -->
+    <section>
+      <h2>Sample Deliverable Snapshot (Redacted Excerpt)</h2>
+      <div class="sample-card">
+        <div class="sample-meta">
+          <strong>Illustrative Brand:</strong> Cascade Trail Goods LLC (Fictional Sample) &nbsp;|&nbsp;
+          <strong>Scope:</strong> Red / Yellow / Green Multi-State Determination Matrix
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Jurisdiction / Track</th>
+              <th>Trigger Checked</th>
+              <th>Status</th>
+              <th>Immediate Action Checklist</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Oregon (Packaging EPR)</strong></td>
+              <td>&gt;$5M global revenue &amp; &gt;1 ton OR packaging</td>
+              <td><span class="pill pill-red">RED · Obligated</span></td>
+              <td>Verify CAA portal status and align trailing packaging weight log prior to May 31 cycle.</td>
+            </tr>
+            <tr>
+              <td><strong>California (SB 54 EPR)</strong></td>
+              <td>Est. CA gross sales &lt;$1M threshold</td>
+              <td><span class="pill pill-yellow">YELLOW · Active Filing</span></td>
+              <td>Must submit active small-producer exemption filing to CalRecycle (not automatic).</td>
+            </tr>
+            <tr>
+              <td><strong>Texas (Sales Tax Nexus)</strong></td>
+              <td>$500K economic nexus threshold not reached</td>
+              <td><span class="pill pill-green">GREEN · Monitor</span></td>
+              <td>Hold registration; track trailing 12-month FBA/DTC sales monthly against threshold.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 3. Three Services + Prices -->
+    <section>
+      <h2>Fixed-Fee Services</h2>
+      <div class="grid-3">
+        <article class="tier">
+          <div>
+            <div class="tier-label">Tier 1 · 2 Business Days</div>
+            <h3>Compliance Health Check</h3>
+            <div class="price">$150 <span>USD</span></div>
+            <ul>
+              <li>60-minute live scoping &amp; diagnostic call</li>
+              <li>1-page Red/Yellow/Green obligation summary</li>
+              <li>Immediate priority action Checklist</li>
+              <li>Covers Nexus, 7-State EPR, or 1099-K screening</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="tier featured">
+          <div>
+            <div class="tier-label">Tier 2 · 5 Business Days</div>
+            <h3>Obligation Determination</h3>
+            <div class="price">$350 <span>USD</span></div>
+            <ul>
+              <li>6–9 page state-by-state written Determination</li>
+              <li>Economic, physical, or 1-ton exemption mapping</li>
+              <li>Marketplace facilitator / small-producer Checklist</li>
+              <li>Prioritized 30-day execution Roadmap</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="tier">
+          <div>
+            <div class="tier-label">Tier 3 · 10 Business Days</div>
+            <h3>Determination + Guided Reg Prep</h3>
+            <div class="price">Starting at $900 <span>USD</span></div>
+            <ul>
+              <li>Full 6–9 page Determination &amp; 30-day Roadmap</li>
+              <li>Administrative data &amp; SKU BOM Checklist setup</li>
+              <li>Guided live portal walkthrough (up to 3 states)</li>
+              <li>Client reviews, signs, and submits directly</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 4. Process -->
+    <section>
+      <h2>How We Work</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">STEP 01</div>
+          <strong>6-Question Self-Check</strong>
+          <p>Email your channel summary and answer our 6-question screening checklist to confirm fit.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">STEP 02</div>
+          <strong>30-Minute Scoping Call</strong>
+          <p>Align on active states, redacted data inputs, and which fixed-fee tier matches your footprint.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">STEP 03</div>
+          <strong>Manual Payment Link</strong>
+          <p>Receive a manual Payoneer payment link or invoice after scope confirmation. No on-site checkout.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">STEP 04</div>
+          <strong>Roadmap Delivery</strong>
+          <p>Receive your Red/Yellow/Green Health Check or 6–9 page Determination &amp; Checklist on schedule.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Contact Footer -->
+    <footer class="contact-box">
+      <h2>Contact</h2>
+      <a class="contact-email" href="mailto:quoclinh321123@gmail.com">quoclinh321123@gmail.com</a>
+      <p class="rule-note">30-minute scoping call first. No rush orders.</p>
+      <p class="disclaimer">
+        This service provides administrative and process determination only and does not constitute a CPA audit opinion or legal advice.
+      </p>
+    </footer>
+  </main>
+</body>
+</html>
